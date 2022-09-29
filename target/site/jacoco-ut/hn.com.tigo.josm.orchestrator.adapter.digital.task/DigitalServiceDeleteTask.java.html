@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DigitalServiceDeleteTask.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DigitalAdapter</a> &gt; <a href="index.source.html" class="el_package">hn.com.tigo.josm.orchestrator.adapter.digital.task</a> &gt; <span class="el_source">DigitalServiceDeleteTask.java</span></div><h1>DigitalServiceDeleteTask.java</h1><pre class="source lang-java linenums">package hn.com.tigo.josm.orchestrator.adapter.digital.task;
+
+import hn.com.tigo.josm.common.adapter.AbstractAdapter;
+import hn.com.tigo.josm.common.adapter.AdapterValidationType;
+import hn.com.tigo.josm.common.adapter.dto.TaskRequestType;
+import hn.com.tigo.josm.common.adapter.dto.TaskResponseType;
+import hn.com.tigo.josm.common.adapter.task.AbstractTask;
+import hn.com.tigo.josm.common.adapter.task.Task;
+import hn.com.tigo.josm.common.exceptions.AdapterException;
+import hn.com.tigo.josm.orchestrator.adapter.digital.DigitalAdapter;
+import hn.com.tigo.josm.orchestrator.adapter.digital.utils.DigitalConstantsAdapter;
+import hn.com.tigo.josm.orchestrator.driver.digital.DigitalDriver;
+import hn.com.tigo.josm.orchestrator.driver.digital.operations.DigitalDeleteOperation;
+import hn.com.tigo.josm.orchestrator.driver.digital.request.DeleteServiceRequest;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+
+import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
+
+/**
+ * The Class DigitalServiceDeleteTask is used to execute the method DigitalServiceDeleteTask (DigitalDriver) .
+ *
+ * @author Leonardo Vijil
+ * @version 1.0.0
+ * @since 18/10/2019
+ */
+@WebService
+@Stateless(mappedName = &quot;DigitalServiceDeleteTask&quot;)
+<span class="fc" id="L33">public class DigitalServiceDeleteTask extends AbstractTask&lt;DigitalDeleteOperation, DigitalDriver&gt; implements Task {</span>
+	
+	/** Attribute that determine log. */
+<span class="fc" id="L36">	protected static final Logger LOGGER = Logger.getLogger(DigitalServiceCreateTask.class);</span>
+	
+	/** Attribute that determine nexusAdapter. */
+	@EJB
+	private DigitalAdapter nexusAdapter;
+
+	/* (non-Javadoc)
+	 * @see hn.com.tigo.josm.common.adapter.task.AbstractTask#getSingletonAdapter()
+	 */
+	@Override
+	protected AbstractAdapter&lt;DigitalDriver&gt; getSingletonAdapter() {
+<span class="fc" id="L47">		return nexusAdapter;</span>
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see hn.com.tigo.josm.common.adapter.task.AbstractTask#createRequest(hn.com.tigo.josm.common.adapter.dto.TaskRequestType)
+	 */
+	@Override
+	protected DigitalDeleteOperation createRequest(final TaskRequestType taskType) throws AdapterException {				
+<span class="fc" id="L56">		final String json = DigitalAdapter.getParameterValue(DigitalConstantsAdapter.JSON, taskType);</span>
+<span class="fc" id="L57">		printParameterValue(DigitalConstantsAdapter.JSON, json);</span>
+<span class="fc" id="L58">		validateParameter(DigitalConstantsAdapter.JSON, json, AdapterValidationType.ALFANUMERIC_ALL, true);</span>
+
+<span class="fc" id="L60">		return new DigitalDeleteOperation(new Gson().fromJson(json, DeleteServiceRequest.class));</span>
+	}
+
+	/* (non-Javadoc)
+	 * @see hn.com.tigo.josm.common.adapter.task.AbstractTask#executeDriverTask(java.lang.Object)
+	 */
+	@Override
+	protected TaskResponseType executeDriverTask(DigitalDriver driver) throws AdapterException {
+<span class="fc" id="L68">		return driver.executeDriver(request);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

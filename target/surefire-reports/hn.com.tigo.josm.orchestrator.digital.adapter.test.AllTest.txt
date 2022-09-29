@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: hn.com.tigo.josm.orchestrator.digital.adapter.test.AllTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.088 sec - in hn.com.tigo.josm.orchestrator.digital.adapter.test.AllTest

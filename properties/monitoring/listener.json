@@ -1,0 +1,16 @@
+{
+	"config" : {
+		"hn.tigo.com.josm.bpmn.product:type=Product_361_PURCHASE" : {
+			"threshold" : 5,
+			"deltaTimeMillis" : 60000,
+			"productId" : 361,
+			"orderType" : "PURCHASE"
+		},
+		"hn.tigo.com.josm.bpmn.product:type=Product_104_PURCHASE" : {
+			"threshold" : 1000,
+			"deltaTimeMillis" : 300000,
+			"productId" : 104,
+			"orderType" : "PURCHASE"
+		}
+	}
+}	

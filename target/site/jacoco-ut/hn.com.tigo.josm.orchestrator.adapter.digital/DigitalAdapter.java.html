@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DigitalAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DigitalAdapter</a> &gt; <a href="index.source.html" class="el_package">hn.com.tigo.josm.orchestrator.adapter.digital</a> &gt; <span class="el_source">DigitalAdapter.java</span></div><h1>DigitalAdapter.java</h1><pre class="source lang-java linenums">package hn.com.tigo.josm.orchestrator.adapter.digital;
+
+import static javax.ejb.ConcurrencyManagementType.BEAN;
+import hn.com.tigo.josm.common.adapter.AbstractAdapter;
+import hn.com.tigo.josm.common.adapter.config.AdapterConfig;
+import hn.com.tigo.josm.common.exceptions.AdapterException;
+import hn.com.tigo.josm.orchestrator.adapter.digital.utils.DigitalConstantsAdapter;
+import hn.com.tigo.josm.orchestrator.driver.digital.DigitalDriver;
+
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.DependsOn;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+
+import org.apache.log4j.Logger;
+
+/**
+ * The Class DigitalAdapter class singleton, used to manage the
+ * configuration for attributes Throughput and TimeOut for tasks in
+ * NexusAdapter .This attributes come from ConfigurationJosm service from
+ * NexusAdapter.xml. Also create a Driver's Pool to manage the maintenance
+ * threads execution and monitoring.
+ * 
+ * @author Leonardo Vijil
+ * @version 1.0.0
+ * @since 14/03/2032
+ */
+@Singleton
+@Startup
+@DependsOn(&quot;MonitoringManager&quot;)
+@ConcurrencyManagement(BEAN)
+public class DigitalAdapter extends AbstractAdapter&lt;DigitalDriver&gt; {
+
+	/** The Constant LOGGER.*/
+<span class="fc" id="L35">	private static final Logger LOGGER = Logger.getLogger(DigitalAdapter.class);</span>
+
+
+	/**
+	 * Instantiates a new NexusAdapter and create a NexusAdapter Monitor
+	 * instance. Also Load the configuration and create the drivers.
+	 */
+<span class="fc" id="L42">	public DigitalAdapter() {</span>
+<span class="fc" id="L43">		LOGGER.info(&quot;Init NexusAdapter Singleton&quot;);</span>
+<span class="fc" id="L44">	}</span>
+
+	
+	/* (non-Javadoc)
+	 * @see hn.com.tigo.josm.common.adapter.AbstractAdapter#createDriver()
+	 */
+	@Override
+	public DigitalDriver createDriver() throws AdapterException {
+<span class="fc" id="L52">		final AdapterConfig config =  this.getConfigurationType();</span>
+<span class="fc" id="L53">		final String digitalServiceDelete = config.getDriverConfig().getConnections().get(&quot;digitalServiceDelete&quot;).getParameters().get(DigitalConstantsAdapter.ENDPOINT);</span>
+<span class="fc" id="L54">		final String digitalServiceCreate = config.getDriverConfig().getConnections().get(&quot;digitalServiceCreate&quot;).getParameters().get(DigitalConstantsAdapter.ENDPOINT);</span>
+<span class="fc" id="L55">		final String tigoSportProvisioning = config.getDriverConfig().getConnections().get(&quot;tigoSportProvisioning&quot;).getParameters().get(DigitalConstantsAdapter.ENDPOINT);</span>
+<span class="fc" id="L56">		final String userNameDelete = config.getDriverConfig().getConnections().get(&quot;digitalServiceDelete&quot;).getParameters().get(&quot;userName&quot;);</span>
+<span class="fc" id="L57">		final String passwordDelete = config.getDriverConfig().getConnections().get(&quot;digitalServiceDelete&quot;).getParameters().get(&quot;password&quot;);</span>
+<span class="fc" id="L58">		final String userNameCreate = config.getDriverConfig().getConnections().get(&quot;digitalServiceCreate&quot;).getParameters().get(&quot;userName&quot;);</span>
+<span class="fc" id="L59">		final String passwordCreate = config.getDriverConfig().getConnections().get(&quot;digitalServiceCreate&quot;).getParameters().get(&quot;password&quot;);</span>
+<span class="fc" id="L60">		final String passwordTigoSport = config.getDriverConfig().getConnections().get(&quot;tigoSportProvisioning&quot;).getParameters().get(&quot;password&quot;);</span>
+<span class="fc" id="L61">		return new DigitalDriver(digitalServiceDelete, digitalServiceCreate, userNameDelete, passwordDelete, userNameCreate, passwordCreate, tigoSportProvisioning, passwordTigoSport);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -1,0 +1,5 @@
+hn\com\tigo\josm\orchestrator\adapter\digital\utils\DigitalConstantsAdapter.class
+hn\com\tigo\josm\orchestrator\adapter\digital\task\DigitalServiceDeleteTask.class
+hn\com\tigo\josm\orchestrator\adapter\digital\DigitalAdapter.class
+hn\com\tigo\josm\orchestrator\adapter\digital\task\TigoSportProvisioningTask.class
+hn\com\tigo\josm\orchestrator\adapter\digital\task\DigitalServiceCreateTask.class

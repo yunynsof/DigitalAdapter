@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:ResponseJOSM
+	xmlns:tns="http://www.tigo.com.hn/ResponseJOSM" xmlns:tns1="http://www.tigo.com.hn/configuration/AdapterConfigType/V1"
+	xmlns:tns2="http://tigo.com.hn/RoamingAdapterConfig/V1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.tigo.com.hn/ResponseJOSM ResponseJOSM.xsd ">
+	<tns:Configurations>
+		<tns:configExpiration>300</tns:configExpiration>
+		<tns2:RoamingAdapterConfig>
+			<tns1:DriverConfig>
+				<tns1:endPoint>http://192.168.162.15:9107/nxs/account/</tns1:endPoint>
+				<tns1:user></tns1:user>
+				<tns1:password></tns1:password>
+				<tns1:request_timeOut>5000</tns1:request_timeOut>
+				<tns1:conect_timeOut>5000</tns1:conect_timeOut>
+			</tns1:DriverConfig>
+			<tns1:MaxThroughput>10000</tns1:MaxThroughput>
+			<tns1:DriverPoolSize>200</tns1:DriverPoolSize>
+			<tns2:fields></tns2:fields>
+		</tns2:RoamingAdapterConfig>
+	</tns:Configurations>
+	<tns:status>
+		<tns:status>OK</tns:status>
+		<tns:code>0000</tns:code>
+	</tns:status>
+</tns:ResponseJOSM>

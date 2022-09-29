@@ -1,0 +1,21 @@
+{
+	"configExpiration": 86400000,
+	"maxThroughput": 600,
+	"driverPoolSize": 50,
+	"driverConfig": {
+		"timeout": 30000,
+		"connections": {
+			"digitalServiceDelete": {
+				"parameters": {
+					"endpoint": "https://testapi.tigo.com.hn/mobile/tigo/hn/digital/offers/additional/v1/subscriber/{subscriber}/offerId/{Id}/consumer/{consumer}"
+				}
+			},
+			"digitalServiceCreate": {
+				"parameters": {
+					"endpoint": "https://testapi.tigo.com.hn/mobile/tigo/hn/digital/amazonOffer/v1/addOffer/consumer/{consumerid}/msisdn/{msisdn}/plan/{plan}/subscriberType/{subscriberType}/offerId/{offerId}"
+				}
+			}
+		}
+	},
+	"mockTaskDelay": []
+}
